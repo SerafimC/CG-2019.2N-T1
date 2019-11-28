@@ -2,6 +2,8 @@ import * as THREE from 'https://threejsfundamentals.org/threejs/resources/threej
 import { OrbitControls } from 'https://threejsfundamentals.org/threejs/resources/threejs/r110/examples/jsm/controls/OrbitControls.js';
 import { GLTFLoader } from 'https://threejsfundamentals.org/threejs/resources/threejs/r110/examples/jsm/loaders/GLTFLoader.js';
 
+const rad = 2 * 3.14
+
 function main() {
     const canvas = document.querySelector('#c');
     const renderer = new THREE.WebGLRenderer({ canvas });
@@ -76,7 +78,7 @@ function main() {
         lthig, rthig,
         lfoot, rfoot,
         tail,
-        larm, rarm,
+        larm, rarm, lhand, rhand,
         rforearm, lforearm; {
         const gltfLoader = new GLTFLoader();
         gltfLoader.load(
@@ -122,6 +124,13 @@ function main() {
                 lforearm = root.getObjectByName('LForeArm_024')
                 rforearm = root.getObjectByName('LForeArm_024')
 
+                // Maos
+                lhand = root.getObjectByName('LHand_00')
+                rhand = root.getObjectByName('RHand_034')
+
+
+                lhand.rotation.x = rad * -0.2
+
             });
     }
 
@@ -136,28 +145,56 @@ function main() {
         return needResize;
     }
 
-    var sense_jaw = 1,
-        sense_head = 1,
-        sense_spine = -1
+    {
+        var count_goodbye = 0
+
+        var sense_spine = 1,
+            sense_larm = 1,
+            sense_lforearm = 1
+
+        var rotation_spine = 0,
+            rotation_larm = 0,
+            rotation_lforearm = 0
+    }
 
     function animate(time) {
         time *= 0.001; // convert to seconds
 
         if (tortodile) {
 
-            if (jaw.rotation.y < -1.45 || jaw.rotation.y > -1)
-                sense_jaw = sense_jaw * -1
+            if (rotation_spine < 0 || rotation_spine > 0.08) {
+                sense_spine = 0
+            }
+            if (count_goodbye > 5) {
+                sense_lforearm = 0
+                    // sense_spine = -1
+            }
 
-            if (head.rotation.y < 0 || head.rotation.y > 0.5)
-                sense_head = sense_head * -1
+            rotation_spine += 0.002 * sense_spine
+            spine.rotation.z = rad * rotation_spine
 
-            if (spine.rotation.y > 0.1 || spine.rotation.y < -0.5)
-                sense_spine = sense_spine * -1
+            if (rotation_larm < 0 || rotation_larm > 0.1)
+                sense_larm *= 0
 
-            jaw.rotation.y += 0.01 * sense_jaw
-                // head.position.z += 0.1 * sense_head
-                // head.rotation.y += 0.01 * sense_head
-            spine.rotation.y += 0.01 * sense_spine
+            rotation_larm += 0.004 * sense_larm
+            larm.rotation.z = rad * rotation_larm
+
+            if (rotation_lforearm < 0 || rotation_lforearm > 0.2) {
+                count_goodbye += 1
+                sense_lforearm *= -1
+            }
+
+
+            // console.log(sense_lforearm)
+
+            rotation_lforearm += 0.004 * sense_lforearm
+            lforearm.rotation.z = rad * rotation_lforearm
+
+
+
+
+
+
 
         }
     }
