@@ -9,12 +9,12 @@ function main() {
     const renderer = new THREE.WebGLRenderer({ canvas });
     renderer.setSize(window.innerWidth, window.innerHeight);
 
-    const fov = 45;
+    const fov = 20;
     const aspect = 2; // the canvas default
     const near = 10;
-    const far = 100;
+    const far = 500;
     const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
-    camera.position.set(0, 20, 50);
+    camera.position.set(0, 60, 150);
 
     const controls = new OrbitControls(camera, canvas);
     controls.target.set(0, 0, 0);
@@ -53,10 +53,29 @@ function main() {
     }
 
     {
+        var geometry = new THREE.SphereGeometry(5, 15, 15);
+        var material = new THREE.MeshStandardMaterial({ color: 0xffffff });
+        var sphere = new THREE.Mesh(geometry, material);
+        sphere.position.set(5, 25, -20)
+        scene.add(sphere);
+    }
+    // Moon
+    {
         const color = 0xFFFFFF;
         const intensity = 1;
         const light = new THREE.DirectionalLight(color, intensity);
-        light.position.set(5, 10, 2);
+        light.position.set(0, 0, 40);
+        light.target.position.set(sphere.position.x, sphere.position.y, sphere.position.z);
+        scene.add(light);
+        scene.add(light.target);
+    }
+    // Moonlight
+    {
+        const color = 0x7777FF;
+        const intensity = 0.7;
+        const light = new THREE.DirectionalLight(color, intensity);
+        light.position.set(sphere.position.x, sphere.position.y, sphere.position.z);
+        light.target.position.set(0, 0, 0);
         scene.add(light);
         scene.add(light.target);
     }
