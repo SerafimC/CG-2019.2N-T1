@@ -1,4 +1,0 @@
-<body>
-    <canvas id="c"></canvas>
-</body>
-<script type="module" src="./index.js"></script>
