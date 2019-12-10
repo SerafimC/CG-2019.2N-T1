@@ -130,6 +130,7 @@ function main() {
 
 
                 lhand.rotation.x = rad * -0.2
+                jaw.rotation.y = (rad / 1.3)
 
             });
     }
@@ -150,24 +151,23 @@ function main() {
 
         var sense_spine = 1,
             sense_larm = 1,
-            sense_lforearm = 1
+            sense_lforearm = 1,
+            sense_jaw = 1
 
         var rotation_spine = 0,
             rotation_larm = 0,
-            rotation_lforearm = 0
+            rotation_lforearm = 0,
+            rotation_jaw = 1.78
     }
 
-    function animate(time) {
+    function goodByeAnimation(time) {
         time *= 0.001; // convert to seconds
 
         if (tortodile) {
 
+
             if (rotation_spine < 0 || rotation_spine > 0.08) {
                 sense_spine = 0
-            }
-            if (count_goodbye > 5) {
-                sense_lforearm = 0
-                    // sense_spine = -1
             }
 
             rotation_spine += 0.002 * sense_spine
@@ -184,18 +184,32 @@ function main() {
                 sense_lforearm *= -1
             }
 
-
             // console.log(sense_lforearm)
 
-            rotation_lforearm += 0.004 * sense_lforearm
+            rotation_lforearm += 0.009 * sense_lforearm
             lforearm.rotation.z = rad * rotation_lforearm
 
+        }
+    }
 
 
+    function breathingAnimation(time) {
+        time *= 0.001; // convert to seconds
 
+        if (tortodile) {
+            lhand.rotation.x = rad
+            larm.rotation.z = rad * 0.9
+            rarm.rotation.z = rad * 0.1
 
+            if (rotation_spine < 0 || rotation_spine > 0.08) {
+                sense_spine *= -1
+            }
 
+            rotation_spine += 0.002 * sense_spine
+            spine.rotation.y = rad * rotation_spine
 
+            rotation_jaw += 0.001436 * sense_spine
+            jaw.rotation.y = rad * rotation_jaw
         }
     }
 
@@ -207,7 +221,8 @@ function main() {
             camera.updateProjectionMatrix();
         }
 
-        animate(time)
+        // goodByeAnimation(time)
+        breathingAnimation(time)
 
         renderer.render(scene, camera);
 
