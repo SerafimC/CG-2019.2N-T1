@@ -53,9 +53,11 @@ function main() {
     }
 
     {
+        var moonTexture = new THREE.TextureLoader().load("./moon.jpg");
         var geometry = new THREE.SphereGeometry(5, 15, 15);
-        var material = new THREE.MeshStandardMaterial({ color: 0xffffff });
+        var material = new THREE.MeshBasicMaterial({ color: 0xffffff });
         var sphere = new THREE.Mesh(geometry, material);
+        material.map = moonTexture;
         sphere.position.set(5, 25, -20)
         scene.add(sphere);
     }
