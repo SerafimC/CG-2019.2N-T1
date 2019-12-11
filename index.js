@@ -53,7 +53,7 @@ function main() {
     }
 
     {
-        var moonTexture = new THREE.TextureLoader().load("./moon.jpg");
+        var moonTexture = new THREE.TextureLoader().load("https://github.com/SerafimC/CG-2019.2N-T1/blob/master/moon.jpg?raw=true");
         var geometry = new THREE.SphereGeometry(5, 15, 15);
         var material = new THREE.MeshBasicMaterial({ color: 0xffffff });
         var sphere = new THREE.Mesh(geometry, material);
