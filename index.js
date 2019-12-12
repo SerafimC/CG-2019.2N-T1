@@ -27,7 +27,7 @@ function main() {
         const planeSize = 40;
 
         const loader = new THREE.TextureLoader();
-        const texture = loader.load('https://threejsfundamentals.org/threejs/resources/images/checker.png');
+        const texture = loader.load('https://live.staticflickr.com/1956/45002704751_76b1c2bd7a_b.jpg');
         texture.wrapS = THREE.RepeatWrapping;
         texture.wrapT = THREE.RepeatWrapping;
         texture.magFilter = THREE.NearestFilter;
