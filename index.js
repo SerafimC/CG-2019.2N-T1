@@ -47,7 +47,7 @@ function main() {
     {
         const skyColor = 0xB1E1FF; // light blue
         const groundColor = 0xB97A20; // brownish orange
-        const intensity = 1;
+        const intensity = 0.01;
         const light = new THREE.HemisphereLight(skyColor, groundColor, intensity);
         scene.add(light);
     }
@@ -55,16 +55,16 @@ function main() {
     {
         var moonTexture = new THREE.TextureLoader().load("./moon.jpg");
         var geometry = new THREE.SphereGeometry(5, 15, 15);
-        var material = new THREE.MeshBasicMaterial({ color: 0xffffff });
+        var material = new THREE.MeshPhongMaterial({ color: 0xffffff });
         var sphere = new THREE.Mesh(geometry, material);
         material.map = moonTexture;
-        sphere.position.set(5, 25, -20)
+        sphere.position.set(10, 18, -25)
         scene.add(sphere);
     }
     // Moon
     {
         const color = 0xFFFFFF;
-        const intensity = 1;
+        const intensity = 0.5;
         const light = new THREE.DirectionalLight(color, intensity);
         light.position.set(0, 0, 40);
         light.target.position.set(sphere.position.x, sphere.position.y, sphere.position.z);
