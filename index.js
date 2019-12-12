@@ -27,11 +27,11 @@ function main() {
         const planeSize = 40;
 
         const loader = new THREE.TextureLoader();
-        const texture = loader.load('https://threejsfundamentals.org/threejs/resources/images/checker.png');
+        const texture = loader.load('./ground.jpg');
         texture.wrapS = THREE.RepeatWrapping;
         texture.wrapT = THREE.RepeatWrapping;
         texture.magFilter = THREE.NearestFilter;
-        const repeats = planeSize / 2;
+        const repeats = planeSize / 10;
         texture.repeat.set(repeats, repeats);
 
         const planeGeo = new THREE.PlaneBufferGeometry(planeSize, planeSize);
