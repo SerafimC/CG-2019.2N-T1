@@ -83,9 +83,9 @@ function main() {
     }
 
     function dumpObject(obj, lines = [], isLast = true, prefix = '') {
-        const localPrefix = isLast ? '└─' : '├─';
+        const localPrefix = isLast ? 'â””â”€' : 'â”œâ”€';
         lines.push(`${prefix}${prefix ? localPrefix : ''}${obj.name || '*no-name*'} [${obj.type}]`);
-        const newPrefix = prefix + (isLast ? '  ' : '│ ');
+        const newPrefix = prefix + (isLast ? '  ' : 'â”‚ ');
         const lastNdx = obj.children.length - 1;
         obj.children.forEach((child, ndx) => {
             const isLast = ndx === lastNdx;
