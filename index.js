@@ -53,7 +53,7 @@ function main() {
     }
 
     {
-        var moonTexture = new THREE.TextureLoader().load("./moon.jpg");
+        var moonTexture = new THREE.TextureLoader().load("https://svs.gsfc.nasa.gov/vis/a010000/a010800/a010843/evol_moon_2048x1024.00252_print.jpg");
         var geometry = new THREE.SphereGeometry(5, 15, 15);
         var material = new THREE.MeshBasicMaterial({ color: 0xffffff });
         var sphere = new THREE.Mesh(geometry, material);
