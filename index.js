@@ -27,11 +27,11 @@ function main() {
         const planeSize = 40;
 
         const loader = new THREE.TextureLoader();
-        const texture = loader.load('https://live.staticflickr.com/1956/45002704751_76b1c2bd7a_b.jpg');
+        const texture = loader.load('./ground.jpg');
         texture.wrapS = THREE.RepeatWrapping;
         texture.wrapT = THREE.RepeatWrapping;
         texture.magFilter = THREE.NearestFilter;
-        const repeats = planeSize / 2;
+        const repeats = planeSize / 10;
         texture.repeat.set(repeats, repeats);
 
         const planeGeo = new THREE.PlaneBufferGeometry(planeSize, planeSize);
@@ -53,7 +53,7 @@ function main() {
     }
 
     {
-        var moonTexture = new THREE.TextureLoader().load("https://svs.gsfc.nasa.gov/vis/a010000/a010800/a010843/evol_moon_2048x1024.00252_print.jpg");
+        var moonTexture = new THREE.TextureLoader().load("./moon.jpg");
         var geometry = new THREE.SphereGeometry(5, 15, 15);
         var material = new THREE.MeshBasicMaterial({ color: 0xffffff });
         var sphere = new THREE.Mesh(geometry, material);
