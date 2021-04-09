@@ -242,8 +242,8 @@ function main() {
             camera.updateProjectionMatrix();
         }
 
-        // goodByeAnimation(time)
-        breathingAnimation(time)
+        goodByeAnimation(time)
+        //breathingAnimation(time)
 
         renderer.render(scene, camera);
 
